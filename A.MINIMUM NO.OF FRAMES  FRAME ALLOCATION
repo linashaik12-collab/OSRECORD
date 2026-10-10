@@ -1,0 +1,35 @@
+```c
+#include <stdio.h>
+
+int main() {
+    printf("Roll no: 25071A6241\n");
+
+    int memory, page, process;
+    int totalFrames, totalPages, minFrames;
+
+    printf("Enter main memory size (in bytes): ");
+    scanf("%d", &memory);
+
+    printf("Enter page size (in bytes): ");
+    scanf("%d", &page);
+
+    totalFrames = memory / page;
+    printf("Total frames available in memory: %d\n", totalFrames);
+
+    printf("Enter process size (in bytes): ");
+    scanf("%d", &process);
+
+    totalPages = (process + page - 1) / page;
+    minFrames = totalPages;
+
+    printf("Total pages required for process: %d\n", totalPages);
+    printf("Minimum number of frames required: %d\n", minFrames);
+
+    if (minFrames <= totalFrames)
+        printf("Process can be allocated in memory.\n");
+    else
+        printf("Process cannot be allocated in memory.\n");
+
+    return 0;
+}
+```
