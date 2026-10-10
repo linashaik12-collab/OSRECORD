@@ -1,0 +1,57 @@
+
+#include <stdio.h>
+
+int main() {
+    printf("Roll no: 25071A6241\n");
+
+    int memory, page, frames, process;
+    int totalPages, i, logical;
+    int frame[100], p, offset, physical;
+
+    printf("Enter main memory size (in bytes): ");
+    scanf("%d", &memory);
+
+    printf("Enter page size (in bytes): ");
+    scanf("%d", &page);
+
+    frames = memory / page;
+    printf("Total frames available in memory: %d\n", frames);
+
+    printf("\nEnter process size (in bytes): ");
+    scanf("%d", &process);
+
+    totalPages = (process + page - 1) / page;
+    printf("Total pages required for process: %d\n", totalPages);
+
+    if (totalPages > frames) {
+        printf("Process cannot be allocated in memory.\n");
+        return 0;
+    }
+
+    printf("Enter frame numbers allocated to each page:\n");
+
+    for (i = 0; i < totalPages; i++) {
+        printf("Page %d -> Frame No: ", i);
+        scanf("%d", &frame[i]);
+    }
+
+    printf("\nEnter Logical Address to translate: ");
+    scanf("%d", &logical);
+
+    if (logical < 0 || logical >= process) {
+        printf("Invalid logical address!\n");
+        return 0;
+    }
+
+    p = logical / page;
+    offset = logical % page;
+
+    physical = frame[p] * page + offset;
+
+    printf("\n--- Address Translation Details ---\n");
+    printf("Page Number (p)   : %d\n", p);
+    printf("Page Offset (d)   : %d\n", offset);
+    printf("Allocated Frame No: %d\n", frame[p]);
+    printf("Physical Address  : %d\n", physical);
+
+    return 0};
